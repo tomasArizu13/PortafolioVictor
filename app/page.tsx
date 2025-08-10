@@ -42,15 +42,15 @@ export default function Page() {
             </div>
             <Reveal>
               <div className="space-y-6">
-                <h2 className="font-display text-3xl leading-tight tracking-tight md:text-4xl">About {"me"}</h2>
+                                <h2 className="font-display text-3xl leading-tight tracking-tight md:text-4xl">About {"me"}</h2>
                 <p className="text-neutral-600 leading-relaxed">
-                 I am a multidisciplinary designer with a strong business-oriented perspective and expertise in interior and spatial design. I specialize in the creation, design, and execution of spaces. In addition, I craft visual identities, graphic assets, and digital experiences. Born and raised in Buenos Aires, Argentina, I bring a unique blend of creativity and strategy to every project.
+                I am a multidisciplinary designer with a strong business-oriented perspective and expertise in interior and spatial design. I specialize in the creation, design, and execution of spaces. In addition, I craft visual identities, graphic assets, and digital experiences. Born and raised in Buenos Aires, Argentina, I bring a unique blend of creativity and strategy to every project.
 
                 </p>
                 <div className="grid grid-cols-3 divide-x divide-neutral-200 overflow-hidden rounded-lg border border-neutral-200">
-                  <Stat value="5+" label="Años" />
-                  <Stat value="30+" label="Proyectos" />
-                  <Stat value="12" label="Premios" />
+                  <Stat value="5+" label="Years" />
+                  <Stat value="30+" label="Projects" />
+                  <Stat value="10" label="Awards" />
                 </div>
               </div>
             </Reveal>
@@ -69,7 +69,7 @@ export default function Page() {
       <Separator className="bg-neutral-200" />
 
       <section id="works" className="container mx-auto max-w-6xl px-4 py-20 md:py-28">
-        <HeaderWithKicker kicker="Selección" title="Trabajos destacados" />
+        <HeaderWithKicker kicker="Selection" title="Featured Works" />
         <PortfolioGrid />
       </section>
 
@@ -100,40 +100,104 @@ export default function Page() {
 /* ---------- Components ---------- */
 
 function SiteHeader() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   return (
     <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b border-neutral-200">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="#top" className="font-display text-xl tracking-tight">
           {`va - studio`}
         </Link>
+        
+        {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 text-sm text-neutral-700 md:flex">
           <a href="#about" className="hover:text-neutral-950 transition-colors">
-            Sobre mí
+            About
           </a>
           <a href="#education" className="hover:text-neutral-950 transition-colors">
-            Educación
+            Education
           </a>
           <a href="#experience" className="hover:text-neutral-950 transition-colors">
-            Experiencia
+            Experience
           </a>
           <a href="#works" className="hover:text-neutral-950 transition-colors">
-            Trabajos
+            Works
           </a>
           {/* <a href="#services" className="hover:text-neutral-950 transition-colors">
-            Servicios
+            Services
           </a> */}
           <a href="#skills" className="hover:text-neutral-950 transition-colors">
             Skills
           </a>
-          <a href="#contact" className="hover:text-neutral-950 transition-colors">
-            Contacto
-          </a>
         </nav>
+        
+        {/* Desktop CTA Button */}
         <a href="#contact" className="ml-4 hidden md:block">
           <Button variant="outline" className="rounded-full border-neutral-300 text-neutral-900 bg-transparent">
-            Consultas
+            Contact
           </Button>
         </a>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="flex flex-col gap-1 p-2 md:hidden"
+          aria-label="Toggle mobile menu"
+        >
+          <span className={`block h-0.5 w-6 bg-neutral-700 transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
+          <span className={`block h-0.5 w-6 bg-neutral-700 transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`} />
+          <span className={`block h-0.5 w-6 bg-neutral-700 transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+        <div className="border-t border-neutral-200 bg-white/95 backdrop-blur">
+          <nav className="flex flex-col px-4 py-4 space-y-4">
+            <a 
+              href="#about" 
+              className="text-sm text-neutral-700 hover:text-neutral-950 transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
+            </a>
+            <a 
+              href="#education" 
+              className="text-sm text-neutral-700 hover:text-neutral-950 transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Education
+            </a>
+            <a 
+              href="#experience" 
+              className="text-sm text-neutral-700 hover:text-neutral-950 transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Experience
+            </a>
+            <a 
+              href="#works" 
+              className="text-sm text-neutral-700 hover:text-neutral-950 transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Works
+            </a>
+            <a 
+              href="#skills" 
+              className="text-sm text-neutral-700 hover:text-neutral-950 transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Skills
+            </a>
+            <div className="pt-2 border-t border-neutral-200">
+              <a href="#contact">
+                <Button variant="outline" className="w-full rounded-full border-neutral-300 text-neutral-900 bg-transparent">
+                  Contact
+                </Button>
+              </a>
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
   )
@@ -142,35 +206,35 @@ function SiteHeader() {
 function Hero() {
   return (
     <section id="top" className="relative">
-      <div className="relative h-[82vh] min-h-[520px] w-full overflow-hidden">
+      <div className="relative h-[90vh] min-h-[550px] w-full overflow-hidden">
         <Image
           src="/images/portada victor.jpg"
           alt="Imagen hero monocromática, detalle macro minimalista."
           fill
-          className="object-cover"
+          className="object-cover object-right md:object-center"
           priority
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/30 to-transparent" />
         <div className="container mx-auto flex h-full max-w-6xl items-end px-4 pb-12 md:items-center md:pb-0">
           <div className="max-w-2xl">
-            <p className="mb-3 text-xs uppercase tracking-[0.25em] text-neutral-700">Diseño — Branding — Editorial</p>
-            <h1 className="font-display text-4xl leading-[1.1] tracking-tight text-neutral-900 md:text-6xl">
-              Portafolio de diseño
-              <span className="block font-sans text-neutral-700 md:mt-2 md:text-xl">
-                Estética neutra, tipografía precisa, composición consciente.
+            <p className="mb-3 text-xs uppercase tracking-[0.25em] text-neutral-700">Design — Branding — Editorial</p>
+            <h1 className="font-display text-3xl leading-[1.1] tracking-tight text-neutral-900 md:text-4xl lg:text-6xl">
+              Design Portfolio
+              <span className="block font-sans text-neutral-700 mt-2 text-base md:text-xl">
+                Neutral aesthetics, precise typography, conscious composition.
               </span>
             </h1>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a href="#works">
                 <Button className="rounded-full bg-neutral-900 text-white hover:bg-neutral-800">
-                  Ver trabajos
+                  View Works
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>
               <a href="#about">
                 <Button variant="outline" className="rounded-full border-neutral-300 text-neutral-900 bg-transparent">
-                  Sobre mí
+                  About Me
                 </Button>
               </a>
             </div>
@@ -335,9 +399,9 @@ function EducationSection() {
   const visible = expanded ? allItems : allItems.slice(0, 2)
 
   return (
-    <section id="education" className="container mx-auto max-w-6xl px-4 pb-4 pt-2 md:pb-10 md:pt-0">
+          <section id="education" className="container mx-auto max-w-6xl px-4 pb-4 pt-2 md:pb-10 md:pt-0">
       <div className="py-16 md:py-24">
-        <HeaderWithKicker kicker="Formación" title="Educación" />
+        <HeaderWithKicker kicker="Formation" title="Education" />
         <div className="relative">
           {/* Línea vertical estilo timeline */}
           <div aria-hidden className="absolute left-3 top-0 h-full w-px bg-neutral-200 md:left-4" />
@@ -362,25 +426,25 @@ function EducationSection() {
 
           {/* Mostrar/ocultar */}
           <div className="mt-8">
-            <Button
-              onClick={() => setExpanded((v) => !v)}
-              variant="outline"
-              className="rounded-full border-neutral-300 text-neutral-900 bg-transparent"
-              aria-expanded={expanded}
-              aria-controls="education-list"
-            >
-              {expanded ? (
-                <>
-                  Ver menos
-                  <ChevronUp className="ml-2 h-4 w-4" />
-                </>
-              ) : (
-                <>
-                  Ver más
-                  <ChevronDown className="ml-2 h-4 w-4" />
-                </>
-              )}
-            </Button>
+                      <Button
+            onClick={() => setExpanded((v) => !v)}
+            variant="outline"
+            className="rounded-full border-neutral-300 text-neutral-900 bg-transparent"
+            aria-expanded={expanded}
+            aria-controls="education-list"
+          >
+            {expanded ? (
+              <>
+                Show Less
+                <ChevronUp className="ml-2 h-4 w-4" />
+              </>
+            ) : (
+              <>
+                Show More
+                <ChevronDown className="ml-2 h-4 w-4" />
+              </>
+            )}
+          </Button>
           </div>
         </div>
       </div>
@@ -468,8 +532,8 @@ function ExperienceSection() {
   const visible = showAll ? allItems : allItems.slice(0, 2)
 
   return (
-    <section id="experience" className="container mx-auto max-w-6xl px-4 py-20 md:py-28">
-      <HeaderWithKicker kicker="Experiencia" title="Professional Experience" />
+          <section id="experience" className="container mx-auto max-w-6xl px-4 py-20 md:py-28">
+      <HeaderWithKicker kicker="Experience" title="Professional Experience" />
       <div className="relative">
         {/* Línea vertical estilo timeline */}
         <div aria-hidden className="absolute left-3 top-0 h-full w-px bg-neutral-200 md:left-4" />
@@ -542,12 +606,12 @@ function ExperienceSection() {
           >
             {showAll ? (
               <>
-                Ver menos
+                Show Less
                 <ChevronUp className="ml-2 h-4 w-4" />
               </>
             ) : (
               <>
-                Ver más
+                Show More
                 <ChevronDown className="ml-2 h-4 w-4" />
               </>
             )}
@@ -580,13 +644,13 @@ function SkillsSection() {
   ]
 
   return (
-    <section id="skills" className="relative overflow-hidden">
+          <section id="skills" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.025),transparent_60%)]" />
       <div className="container mx-auto max-w-6xl px-4 py-20 md:py-28">
-        <HeaderWithKicker kicker="Skills" title="Herramientas y capacidades" />
+        <HeaderWithKicker kicker="Skills" title="Tools and Capabilities" />
         <Reveal>
           <p className="max-w-3xl text-neutral-600">
-            Como diseñadora, transformo ideas en soluciones visuales y funcionales utilizando estas herramientas.
+            As a designer, I transform ideas into visual and functional solutions using these tools.
           </p>
         </Reveal>
 
@@ -614,35 +678,35 @@ function SkillsSection() {
 
 function CTASection() {
   return (
-    <section id="contact" className="relative overflow-hidden">
+          <section id="contact" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.02),transparent_60%)]" />
       <div className="container mx-auto max-w-6xl px-4 py-20 md:py-28">
-        <HeaderWithKicker kicker="Contacto" title="Hablemos de tu próximo proyecto" />
+        <HeaderWithKicker kicker="Contact" title="Let's talk about your next project" />
         <div className="grid gap-8 md:grid-cols-2">
           <Card className="border-neutral-200">
             <CardContent className="p-6">
-              <form onSubmit={(e) => e.preventDefault()} className="grid gap-4" aria-label="Formulario de contacto">
+              <form onSubmit={(e) => e.preventDefault()} className="grid gap-4" aria-label="Contact form">
                 <label className="grid gap-2">
-                  <span className="text-sm text-neutral-700">Nombre</span>
-                  <Input placeholder="Tu nombre" />
+                  <span className="text-sm text-neutral-700">Name</span>
+                  <Input placeholder="Your name" />
                 </label>
                 <label className="grid gap-2">
                   <span className="text-sm text-neutral-700">Email</span>
-                  <Input type="email" placeholder="tucorreo@email.com" />
+                  <Input type="email" placeholder="your.email@example.com" />
                 </label>
                 <label className="grid gap-2">
-                  <span className="text-sm text-neutral-700">Mensaje</span>
-                  <Textarea placeholder="Cuéntame sobre tu idea" rows={5} />
+                  <span className="text-sm text-neutral-700">Message</span>
+                  <Textarea placeholder="Tell me about your idea" rows={5} />
                 </label>
                 <div className="flex items-center gap-3">
-                  <Button className="rounded-full bg-neutral-900 text-white hover:bg-neutral-800">Enviar</Button>
-                  <p className="text-sm text-neutral-500">Tiempo de respuesta aproximado: 24–48h.</p>
+                  <Button className="rounded-full bg-neutral-900 text-white hover:bg-neutral-800">Send</Button>
+                  <p className="text-sm text-neutral-500">Approximate response time: 24–48h.</p>
                 </div>
               </form>
             </CardContent>
           </Card>
           <div className="space-y-6">
-            <p className="text-neutral-600">También puedes escribirme directamente o seguir mi trabajo en redes:</p>
+            <p className="text-neutral-600">You can also write to me directly or follow my work on social media:</p>
             <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-neutral-500" />
@@ -663,10 +727,6 @@ function CTASection() {
                 </a>
               </li>
             </ul>
-            <div className="rounded-xl border border-dashed border-neutral-300 p-4 text-sm text-neutral-500">
-              Reemplaza las imágenes de ejemplo por tus propios proyectos. Solo actualiza las URLs en la sección
-              “Trabajos destacados”.
-            </div>
           </div>
         </div>
       </div>
@@ -678,28 +738,28 @@ function Footer() {
   return (
     <footer className="border-t border-neutral-200">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-neutral-600 md:flex-row">
-        <div>© {new Date().getFullYear()} Studio. Todos los derechos reservados.</div>
+        <div>© {new Date().getFullYear()} Studio. All rights reserved.</div>
         <div className="flex items-center gap-6">
           <Link className="hover:text-neutral-900" href="#about">
-            Sobre mí
+            About
           </Link>
           <Link className="hover:text-neutral-900" href="#education">
-            Educación
+            Education
           </Link>
           <Link className="hover:text-neutral-900" href="#experience">
-            Experiencia
+            Experience
           </Link>
           <Link className="hover:text-neutral-900" href="#works">
-            Trabajos
+            Works
           </Link>
           {/* <Link className="hover:text-neutral-900" href="#services">
-            Servicios
+            Services
           </Link> */}
           <Link className="hover:text-neutral-900" href="#skills">
             Skills
           </Link>
           <Link className="hover:text-neutral-900" href="#contact">
-            Contacto
+            Contact
           </Link>
         </div>
       </div>
