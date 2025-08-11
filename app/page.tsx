@@ -151,7 +151,9 @@ function SiteHeader() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+        mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+      }`}>
         <div className="border-t border-neutral-200 bg-white/95 backdrop-blur">
           <nav className="flex flex-col px-4 py-4 space-y-4">
             <a 
@@ -247,6 +249,11 @@ function Hero() {
         </div>
         <div className="pointer-events-none absolute right-6 top-6 hidden select-none text-[10px] tracking-[0.35em] text-white/90 drop-shadow md:block">
           {"MULTIDICIPLINARY DESIGNER"}
+        </div>
+        
+        {/* Mobile microtypography */}
+        <div className="pointer-events-none absolute right-4 top-4 select-none text-[8px] tracking-[0.25em] text-white/90 drop-shadow md:hidden">
+          {"MULTIDISCIPLINARY DESIGNER"}
         </div>
 
         {/* Flecha de scroll sutil */}
@@ -677,32 +684,48 @@ function SkillsSection() {
 /* ---------- CTA ---------- */
 
 function CTASection() {
+  const handleEmailClick = () => {
+    const subject = encodeURIComponent('Portfolio Inquiry')
+    const body = encodeURIComponent(`Hi Victoria,
+
+I saw your portfolio and I really like what you do. I would like to contact you to discuss a potential project.
+
+Looking forward to hearing from you!
+
+Best regards,
+[Your name]`)
+
+    window.location.href = `mailto:vickyarizu@gmail.com?subject=${subject}&body=${body}`
+  }
+
   return (
-          <section id="contact" className="relative overflow-hidden">
+    <section id="contact" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.02),transparent_60%)]" />
       <div className="container mx-auto max-w-6xl px-4 py-20 md:py-28">
         <HeaderWithKicker kicker="Contact" title="Let's talk about your next project" />
         <div className="grid gap-8 md:grid-cols-2">
           <Card className="border-neutral-200">
-            <CardContent className="p-6">
-              <form onSubmit={(e) => e.preventDefault()} className="grid gap-4" aria-label="Contact form">
-                <label className="grid gap-2">
-                  <span className="text-sm text-neutral-700">Name</span>
-                  <Input placeholder="Your name" />
-                </label>
-                <label className="grid gap-2">
-                  <span className="text-sm text-neutral-700">Email</span>
-                  <Input type="email" placeholder="your.email@example.com" />
-                </label>
-                <label className="grid gap-2">
-                  <span className="text-sm text-neutral-700">Message</span>
-                  <Textarea placeholder="Tell me about your idea" rows={5} />
-                </label>
-                <div className="flex items-center gap-3">
-                  <Button className="rounded-full bg-neutral-900 text-white hover:bg-neutral-800">Send</Button>
-                  <p className="text-sm text-neutral-500">Approximate response time: 24–48h.</p>
+            <CardContent className="p-8 text-center">
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <h3 className="font-display text-2xl">Ready to start your project?</h3>
+                  <p className="text-neutral-600 max-w-md mx-auto">
+                    Let's discuss your ideas and bring your vision to life. I'm here to help you create something amazing.
+                  </p>
                 </div>
-              </form>
+                
+                <Button 
+                  onClick={handleEmailClick}
+                  className="rounded-full bg-neutral-900 text-white hover:bg-neutral-800 px-8 py-3 text-lg"
+                >
+                  <Mail className="mr-2 h-5 w-5" />
+                  Send me an email
+                </Button>
+                
+                <p className="text-sm text-neutral-500">
+                  I typically respond within 24–48 hours
+                </p>
+              </div>
             </CardContent>
           </Card>
           <div className="space-y-6">
@@ -710,8 +733,8 @@ function CTASection() {
             <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-neutral-500" />
-                <a className="hover:underline" href="mailto:hello@example.com">
-                  hello@example.com
+                <a className="hover:underline" href="mailto:vickyarizu@gmail.com">
+                  vickyarizu@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
@@ -737,9 +760,9 @@ function CTASection() {
 function Footer() {
   return (
     <footer className="border-t border-neutral-200">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-neutral-600 md:flex-row">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 py-8 text-sm text-neutral-600 md:flex-row md:gap-4">
         <div>© {new Date().getFullYear()} Studio. All rights reserved.</div>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
           <Link className="hover:text-neutral-900" href="#about">
             About
           </Link>
